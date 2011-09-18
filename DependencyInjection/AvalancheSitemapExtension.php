@@ -21,17 +21,24 @@ class AvalancheSitemapExtension extends Extension
             throw new InvalidArgumentException('Please provide a base_url in the sitemap configuration');
         }
 
+        if (!isset($config['driver'])) {
+            throw new InvalidArgumentException('Please provide a driver in the sitemap configuration');
+        }
+        $driver = $config['driver'];
+        
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('sitemap.xml');
+        
+        $container->setAlias('sitemap.url.repository', 'sitemap.url.'.$driver.'_repository');
 
-        foreach (array('collection', 'database') as $key) {
-            if (isset($config[$key])) {
-                $container->setParameter(sprintf("sitemap.mongodb.%s", $key), $config[$key]);
+        if ('odm' == $driver) {
+            foreach (array('collection', 'database') as $key) {
+                if (isset($config[$key])) {
+                    $container->setParameter(sprintf("sitemap.mongodb.%s", $key), $config[$key]);
+                }
             }
         }
 
-        if(isset($config['base_url'])) {
-            $container->setParameter('sitemap.base_url', $config['base_url']);
-        }
+        $container->setParameter('sitemap.base_url', $config['base_url']);
     }
 }

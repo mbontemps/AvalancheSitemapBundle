@@ -1,5 +1,5 @@
 sitemap:
-    pattern:  /sitemap.xml
+    pattern:  /sitemap-{page}.xml
     defaults: { _controller: sitemap.controller:sitemap, _format: xml }
     requirements: { _method: GET, _format: xml }
 

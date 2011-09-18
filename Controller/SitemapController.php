@@ -23,6 +23,7 @@ class SitemapController
     {
         $page = $this->request->query->get('page', 1);
 
+        // TODO: populate if necessary
         $this->sitemap->setPage($page);
 
         return $this->templating->renderResponse('AvalancheSitemapBundle:Sitemap:sitemap.twig.xml', array(

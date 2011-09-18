@@ -23,11 +23,14 @@
             <argument type="service" id="templating"></argument>
             <argument type="service" id="request"></argument>
         </service>
-        <service id="sitemap.url.repository"
+        <service id="sitemap.url.odm_repository"
                 class="Avalanche\Bundle\SitemapBundle\Document\UrlRepository"
                 factory-service="doctrine.odm.mongodb.document_manager"
                 factory-method="getRepository">
             <argument>%sitemap.url.class%</argument>
+        </service>
+        <service id="sitemap.url.array_repository"
+                class="Avalanche\Bundle\SitemapBundle\Document\ArrayUrlRepository">
         </service>
         <service id="sitemap.url.mapper" class="%sitemap.url.mapper.class%">
             <tag name="doctrine.odm.mongodb.default_event_listener" event="loadClassMetadata" />
