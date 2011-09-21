@@ -1,11 +1,11 @@
 <loc>{{ url.loc|sm_absolutize }}</loc>
-{% if url.lastmod is defined %}
+{% if url.lastmod is defined and url.lastmod is not null %}
 <lastmod>{{ url.lastmod|sm_format_date }}</lastmod>
 {% endif %}
-{% if url.changefreq is defined %}
+{% if url.changefreq is defined and url.changefreq is not null %}
 <changefreq>{{ url.changefreq }}</changefreq>
 {% endif %}
-{% if url.priority is defined %}
+{% if url.priority is defined and url.priority is not null %}
 <priority>{{ url.priority }}</priority>
 {% endif %}
 {% if url.images is defined %}
